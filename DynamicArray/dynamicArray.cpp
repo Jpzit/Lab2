@@ -25,9 +25,34 @@ DynamicArray::DynamicArray(unsigned int _capacite)
 	}
 }
 
+DynamicArray::DynamicArray(const DynamicArray& _source)
+	:capacite(_source.capacite),
+	tabElement(new int[capacite])
+{
+	for (unsigned int i = 0; i < capacite; i++)
+	{
+		tabElement[i] = _source.tabElement[i];
+	}
+}
+
 DynamicArray::~DynamicArray()
 {
 	delete[] tabElement;
+}
+
+DynamicArray& DynamicArray::operator=(const DynamicArray &_source)
+{
+	if (&_source != this)
+	{
+		delete[] tabElement;
+		capacite = _source.capacite;
+		tabElement = new int[capacite];
+		for (unsigned int i = 0; i < capacite; i++)
+		{
+			tabElement[i] = _source.tabElement[i];
+		}
+	}
+	return *this;
 }
 
 int DynamicArray::getCapacite() const
