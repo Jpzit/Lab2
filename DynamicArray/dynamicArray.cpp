@@ -6,7 +6,7 @@ using namespace std;
 
 DynamicArray::DynamicArray()
 {
-	if (capacite == 0) throw std::invalid_argument("la capaciter est de zero");
+	if (capacite == 0) throw std::invalid_argument("la capaciter doit être supérieur à 0");
 	tabElement = new int[capacite];
 	for (int i = 0; i < capacite; i++)
 	{
@@ -16,6 +16,7 @@ DynamicArray::DynamicArray()
 
 DynamicArray::DynamicArray(unsigned int _capacite)
 {
+	if (_capacite == 0) throw std::invalid_argument("la capaciter doit être supérieur à 0");
 	capacite = _capacite;
 	tabElement = new int[capacite];
 	for (int i = 0; i < capacite; i++)
@@ -36,6 +37,7 @@ int DynamicArray::getCapacite() const
 
 void DynamicArray::setCapacite(unsigned int nouvelle_capacite)
 {
+	if (nouvelle_capacite < 1) throw std::invalid_argument("la capaciter de ne peut être inférieure à 1");
 	int * tabTemporaire = new int[nouvelle_capacite];
 	for (int i = 0; i < min(capacite,nouvelle_capacite); i++)
 	{
@@ -52,7 +54,7 @@ void DynamicArray::setCapacite(unsigned int nouvelle_capacite)
 
 int DynamicArray::getElement(unsigned int i) const
 {
-	if (i >= capacite) throw std::out_of_range("out of range");
+	if (i > capacite) throw std::out_of_range("out of range");
 	return tabElement[i];
 }
 
